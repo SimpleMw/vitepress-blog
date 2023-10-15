@@ -1,7 +1,7 @@
 import mysidebar from './config/sidebar'
 
 export default {
-  base : '/vitepress-blog/',
+  // base : '/vitepress-blog/',
   themeConfig: {
     siteTitle: 'Simplemw\'s blog',
     logo: 'images/touxiang.png',
