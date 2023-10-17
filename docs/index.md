@@ -60,6 +60,9 @@ hero:
     {{ displayedSentence }}
     <span class="cursor"></span>
   </div>
+<div style="position: fixed;top: 0 px;width: 160px;height: 70px;text-align:center;left: 84%;top: 71%;">
+    <embed wmode="transparent" src="./swf/lock.swf" quality="high" bgcolor="#ffffff" width="160" height="70" name="honehoneclock" align="middle" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
+    </div>
 </div>
 
 <script>
