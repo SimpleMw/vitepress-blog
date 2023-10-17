@@ -60,8 +60,8 @@ hero:
     {{ displayedSentence }}
     <span class="cursor"></span>
   </div>
-<div style="position: fixed;top: 0 px;width: 160px;height: 70px;text-align:center;left: 84%;top: 71%;">
-    <embed wmode="transparent" src="./swf/lock.swf" quality="high" bgcolor="#ffffff" width="160" height="70" name="honehoneclock" align="middle" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
+    <div class = "peoplelock">
+       <iframe src="https://renwai.ren/cdn/html/shizhong/" scrolling="no" frameborder="0" width="170px" height="60px"></iframe>
     </div>
 </div>
 
@@ -143,6 +143,16 @@ export default {
   height: 24px;
   background-color: black;
   animation: blink 0.8s infinite;
+}
+
+.peoplelock {
+    position: fixed;
+    top: 0px;
+    width: 160px;
+    height: 70px;
+    text-align:center;
+    left: 45%;
+    top: 0%;
 }
 
 @keyframes blink {
