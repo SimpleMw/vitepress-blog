@@ -291,7 +291,7 @@ export default {
                                     "link": "/guide/SpringCloud/消息中间件/RabbitMq.md"
                                 },
                                 {
-                                    "text": "RabbitMq",
+                                    "text": "Disruptor",
                                     "link": "/guide/SpringCloud/消息中间件/Disruptor.md"
                                 },
                             ],
