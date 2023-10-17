@@ -289,7 +289,11 @@ export default {
                                 {
                                     "text": "RabbitMq",
                                     "link": "/guide/SpringCloud/消息中间件/RabbitMq.md"
-                                }
+                                },
+                                {
+                                    "text": "RabbitMq",
+                                    "link": "/guide/SpringCloud/消息中间件/Disruptor.md"
+                                },
                             ],
                         },
                         {
