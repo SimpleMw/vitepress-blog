@@ -25,7 +25,8 @@ export default {
             // Title for the section.
             text: '后端',
             items: [
-              { text: 'JAVA', link: '/guide/' },
+              { text: 'JAVA', link: '/guide/java/' },
+              { text: 'PYTHON', link: '/guide/python/' },
             ]
           }
         ]
