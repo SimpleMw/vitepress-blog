@@ -182,3 +182,30 @@ SELECT SQL_CACHE * FROM test where id = 1
 mysqldump -u root -p 数据库名>d:\数据库名.sql
 ```
 
+
+
+#### 批量操作
+
+- 批量删除索引
+
+```sql
+SELECT 
+CONCAT("ALTER TABLE `", TABLE_NAME,"` DROP INDEX IX_DELETED;") 
+FROM INFORMATION_SCHEMA.STATISTICS WHERE TABLE_SCHEMA = 'aps_vn1' AND INDEX_NAME = 'IX_DELETED';
+```
+
+
+
+#### 优化SQL
+
+- force index()
+
+  强制指定索引
+
+- straight_join
+
+  在内连接中，强制使用左表当作驱动表，改表优化器对于联表查询的执行顺序
+
+- analyze table 表名
+
+  分析表，以便优化器可以更好地理解表的结构，更新表的统计信息包括行数、索引使用情况等

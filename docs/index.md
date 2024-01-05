@@ -50,7 +50,7 @@ hero:
     }
 
     .image {
-      order: 2;
+        order: 2;
     }
 </style>
 

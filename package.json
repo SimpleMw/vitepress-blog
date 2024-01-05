@@ -12,6 +12,7 @@
   "dependencies": {
     "vitepress-plugin-pagefind": "^0.2.10",
     "vitepress-plugin-search": "^1.0.4-alpha.20",
-    "xmind-embed-viewer": "^1.2.0"
+    "xmind-embed-viewer": "^1.2.0",
+    "yarn": "^1.22.19"
   }
 }

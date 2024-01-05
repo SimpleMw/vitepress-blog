@@ -248,8 +248,24 @@ export default {
                         "link": "/guide/java/SpringBoot/websocket.md"
                     },
                     {
+                        "text": "webflux",
+                        "link": "/guide/java/SpringBoot/webflux.md"
+                    },
+                    {
+                        "text": "缓存机制",
+                        "link": "/guide/java/SpringBoot/缓存.md"
+                    },
+                    {
                         "text": "多数据源",
                         "link": "/guide/java/SpringBoot/多数据源.md"
+                    },
+                    {
+                        "text": "日志配置",
+                        "link": "/guide/java/SpringBoot/log.md"
+                    },
+                    {
+                        "text": "重试机制",
+                        "link": "/guide/java/SpringBoot/重试机制.md"
                     },
                 ],
             },
