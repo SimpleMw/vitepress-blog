@@ -149,18 +149,64 @@ select * from performance_schema.threads where PROCESSLIST_COMMAND = 'Query' ord
 select * from information_schema.`PROCESSLIST` where Command != 'Sleep' order by `time` DESC
 ```
 
-
-
-- 统一修改字符集(生产修改的sql然后统一执行)
+- 查看当前ip的执行记录
 
 ```sql
-select 
-distinct
-CONCAT("ALTER TABLE `", TABLE_NAME,"` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;") 
-from information_schema.COLUMNS where TABLE_SCHEMA = 'fit'  and table_name like 't_pom%' 
-and (character_set_name != 'utf8'
-or collation_name != 'utf8_general_ci')
+select *  from information_schema.`PROCESSLIST` where HOST LIKE '10.245.228.89%' order by `time` DESC
 ```
+
+- 查看全表扫描的
+
+```sql
+select * from statements_with_full_table_scans;
+```
+
+各个参数代表以下含义：
+1. `query`：执行全表扫描的查询语句。
+
+2. `db`：查询所属的数据库名称。
+
+3. `exec_count`：查询的执行次数。
+
+4. `total_latency`：查询的总延迟时间。
+
+5. `rows_sent`：查询返回的行数。
+
+6. `rows_examined`：查询扫描的行数，包括通过全表扫描访问的行数。
+
+7. `rows_affected`：查询影响的行数。
+
+8. `full_scan`：指示是否进行了全表扫描，通常是一个布尔值或标志。
+
+  注：`query`查询的语句不是完整的，所以也只能通过其它方式查看全表扫描的表
+
+- 查看锁表
+
+```
+select * from innodb_lock_waits;
+```
+
+表中的一些常见字段的含义：
+
+1.`requesting_trx_id`：正在请求锁定的事务ID。
+
+2.`requested_lock_id`：正在请求的锁定ID。
+
+3.`blocking_trx_id`：正在阻塞当前请求的事务ID。
+
+4.`blocking_lock_id`：导致阻塞的锁定ID。
+
+5.`requested_lock_mode`：正在请求的锁定模式，例如共享锁（S）或排他锁（X）。
+
+6.`blocking_lock_mode`：导致阻塞的锁定模式。
+
+7.`waiting_query`：正在等待锁定的查询语句。
+
+8.`blocking_query`：导致阻塞的查询语句。
+
+9.`wait_started`：等待开始的时间戳。
+
+10.`wait_age`：等待持续的时间。
 
 
 
@@ -198,14 +244,36 @@ FROM INFORMATION_SCHEMA.STATISTICS WHERE TABLE_SCHEMA = 'aps_vn1' AND INDEX_NAME
 
 #### 优化SQL
 
-- force index()
+- 统一修改字符集(生产修改的sql然后统一执行)
 
-  强制指定索引
+```sql
+select 
+distinct
+CONCAT("ALTER TABLE `", TABLE_NAME,"` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;") 
+from information_schema.COLUMNS where TABLE_SCHEMA = 'fit'  and table_name like 't_pom%' 
+and (character_set_name != 'utf8'
+or collation_name != 'utf8_general_ci')
+```
 
-- straight_join
+- 修改索引表的查询顺序
 
-  在内连接中，强制使用左表当作驱动表，改表优化器对于联表查询的执行顺序
+在内连接中，强制使用左表当作驱动表，改表优化器对于联表查询的执行顺序
 
-- analyze table 表名
+```sql
+STRAiGHT_JOIN
+```
 
-  分析表，以便优化器可以更好地理解表的结构，更新表的统计信息包括行数、索引使用情况等
+- 强制索引
+
+```sql
+SELECT * FROM table_name FORCE INDEX (index_name);
+```
+
+- 分析表
+
+以便优化器可以更好地理解表的结构，更新表的统计信息包括行数、索引使用情况等
+
+```SQL
+analyze table 表名
+```
+
