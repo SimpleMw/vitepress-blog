@@ -30,35 +30,54 @@ date: 2020-11-08 11:11:11
 </dependency>
 ```
 
+`knife4j-micro-spring-boot-starter`是适用于微服务架构的Knife4j Starter
+
+`knife4j-spring-boot-starter`是传统单体应用的Knife4j Starter
+
 - 设置swagger的配置
 
 ```java
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig {
+@EnableKnife4j
+public class Swagger {
 
-    public Docket createRestApi(){
+    @Bean
+    public Docket docket(){
         return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo())
-                .select()
-                //扫描的controller包路径
+             	//通用响应参数配置
+                .globalResponseMessage(RequestMethod.GET.GET, getGlobalResponseMessage()) 
+                .globalResponseMessage(RequestMethod.POST, getGlobalResponseMessage())
+                .apiInfo(apiInfo()).select()
                 .apis(RequestHandlerSelectors.basePackage("com.simplemw"))
-                .paths(PathSelectors.any())
-                //写最后
+                .paths(PathSelectors.any()).build()
+            	//统一添加后缀
+            	.pathMapping("api");
+
+    }
+
+    private ApiInfo apiInfo(){
+        return new ApiInfoBuilder()
+                //页面标题
+                .title("springBoot测试使用Swagger2构建RESTful API")
+                //创建人
+                .contact(new Contact("admin","127.0.0.1",""))
+                //版本号
+                .version("1.0")
+                //描述
+                .description("API 描述")
                 .build();
     }
 
-    //公共描述
-    //也可直接用在上面方法中，分开写的原因是，有时会扫描多个包路径，就可以直接用公共描述了
-    private ApiInfo apiInfo(){
-        return new ApiInfoBuilder()
-                .title("这是标题")//设置页面标题
-                .description("这是描述......")//描述
-                .version("1.0")//版本
-                //这是联系人信息
-                .contact(new Contact("simplemw", "http://localhost:8080", "xxx@qq.com"))
-                //写最后
-                .build();
+
+    /**
+     * 通用响应码配置
+     */
+    private List<ResponseMessage> getGlobalResponseMessage() {
+        List<ResponseMessage> responseList = new ArrayList<>();
+        responseList.add(new ResponseMessageBuilder().code(200).message("成功").build());
+        responseList.add(new ResponseMessageBuilder().code(406).message("失败").build());
+        return responseList;
     }
 }
 ```
@@ -92,6 +111,39 @@ pojo中
 @ApiModelProperty(value = "模板名称")    //对属性的描述
 ```
 
+- 动态返回
+
+```java
+@Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class ReturnDto<T> implements Serializable {
+    private String msg;
+    private T data;
+    private Integer code;
+}
+```
+
+- 举例Controller接口
+
+```java
+@Api("测试")
+@Slf4j
+@RestController
+@RequestMapping("/demo")
+public class DemoController {
+
+    @ApiOperation(value = "用户列表")
+    @GetMapping("getUser")
+    public ReturnDto<List<UserDto>> getUser(){
+        List<UserDto> list = new ArrayList<>();
+        list.add(UserDto.builder().name("111").message("message").build());
+        return new ReturnDto<List<UserDto>>("查询成功!",list,200);
+    }
+}
+```
+
 
 
 ---
@@ -101,3 +153,4 @@ pojo中
 增强ui的访问页面  http://localhost:8080/doc.html#/
 
 运行时，swagger会自动将api注解配置到网页上
+

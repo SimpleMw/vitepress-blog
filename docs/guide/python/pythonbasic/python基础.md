@@ -191,3 +191,30 @@ finally:
 raise "这是我手动抛出的异常"
 ```
 
+
+
+
+
+#### 属性
+
+##### 动态属性
+
+```python
+@property
+```
+
+可以自定义get，set方法
+
+##### 魔法函数
+
+```python
+__getattr__
+```
+
+```python
+__getattribute__
+```
+
+- getattribute 先于 getattr 执行
+- 在属性查找过程中若为找到定义属性，会执行此两个魔法函数
+

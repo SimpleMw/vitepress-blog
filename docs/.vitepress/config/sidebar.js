@@ -40,7 +40,10 @@ export default {
                                 text: 'mysql-mysql小点杂',
                                 link: '/guide/java/database/mysql/mysql-mysql小点杂.md'
                             },
-
+                            {
+                                text: 'mysql-lock',
+                                link: '/guide/java/database/mysql/mysql-lock.md'
+                            },
                         ],
                     },
                     {

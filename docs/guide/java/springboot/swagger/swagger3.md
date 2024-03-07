@@ -152,7 +152,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("swagger3 title")
                 .description("测试swagger整合knife4j生成离线接口文档")
-                .termsOfServiceUrl("https://www.baidu.com/")
+                .termsOfServiceUrl("https://www.123.com/")
                 .contact(new Contact("name", "", "123456@qq.com"))
                 .version("1.0")
                 .build();
