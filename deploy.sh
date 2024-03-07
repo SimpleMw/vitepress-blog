@@ -21,6 +21,7 @@ rm -rf docs/.vitepress/dist  #删除dist文件夹
 cd docs/.vitepress/dist
 git pull
 yarn docs:build
+git add -A
 git commit -m 'update'
 git branch -M main
 git push -u origin main
