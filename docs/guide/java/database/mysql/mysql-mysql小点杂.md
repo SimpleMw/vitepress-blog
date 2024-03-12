@@ -277,3 +277,66 @@ SELECT * FROM table_name FORCE INDEX (index_name);
 analyze table 表名
 ```
 
+
+
+#### 常见的mysql配置
+
+```mysql
+show VARIABLES
+```
+
+- 慢sql相关
+
+```
+slow_query_log: 是否启用慢查询日志功能
+long_query_time: 定义慢查询的阈值时间，超过该时间的查询会被记录在慢查询日志中
+log_queries_not_using_indexes: 是否记录未使用索引的查询语句
+log_slow_admin_statements: 是否记录管理员操作的慢查询语句
+log_slow_slave_statements: 是否记录从服务器执行的慢查询语句
+slow_query_log_file: 慢查询日志文件的路径
+slow_query_log_timestamp_always: 是否在慢查询日志中始终包含时间戳
+slow_query_log_timestamp_precision: 慢查询日志时间戳的精度
+log_output: 慢查询日志的输出方式，可以选择FILE、TABLE或者NONE
+log_slow_rate_limit: 控制慢查询日志记录速率的限制
+```
+
+- 连接相关
+
+```
+max_connections: 允许的最大连接数
+wait_timeout: 客户端连接没有活动时，服务器将关闭连接之前等待的秒数
+interactive_timeout: 客户端连接没有活动时，服务器将关闭连接之前等待的秒数
+connect_timeout: 客户端连接到服务器的超时时间
+max_user_connections: 每个用户的最大连接数限制
+thread_cache_size: 线程缓存池的大小，用于重用已经创建的线程
+max_connect_errors: 允许的连接错误次数，超过该次数后将禁止连接
+back_log: 服务器在拒绝新连接之前可以排队的最大连接数
+net_read_timeout: 从服务器读取数据的超时时间
+net_write_timeout: 向服务器写入数据的超时时间
+```
+
+- 查询缓存
+
+```
+query_cache_type: 查询缓存的类型，可以设置为OFF、ON或者DEMAND
+query_cache_size: 查询缓存的大小
+query_cache_limit: 查询结果的大小限制，超过该大小的查询结果不会被缓存
+query_cache_min_res_unit: 查询结果的最小缓存单位
+query_cache_strip_comments: 是否在缓存查询前去除注释
+query_cache_wlock_invalidate: 是否在写锁时使查询缓存无效
+query_cache_limit: 查询结果的大小限制，超过该大小的查询结果不会被缓存
+query_cache_type: 查询缓存的类型，可以设置为OFF、ON或者DEMAND
+query_cache_size: 查询缓存的大小
+query_cache_min_res_unit: 查询结果的最小缓存单位
+```
+
+
+
+
+
+
+
+
+
+
+
