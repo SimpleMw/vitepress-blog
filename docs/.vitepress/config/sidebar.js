@@ -255,6 +255,10 @@ export default {
                         "link": "/guide/java/SpringBoot/webflux.md"
                     },
                     {
+                        "text": "minio",
+                        "link": "/guide/java/SpringBoot/minio.md"
+                    },
+                    {
                         "text": "缓存机制",
                         "link": "/guide/java/SpringBoot/缓存.md"
                     },
