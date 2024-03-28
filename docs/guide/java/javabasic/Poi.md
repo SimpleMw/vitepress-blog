@@ -601,6 +601,169 @@ public class DemoOneService {
 }
 ```
 
+- 带合并单元格的导入
+
+```JAVA
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
+import java.util.Date;
+
+@Data
+public class TestDemo {
+
+
+    @ApiModelProperty(value = "CFG编号")
+    @ExcelProperty(value = "CFG编号", index = 0)
+    private String cfgNo;
+    @ApiModelProperty(value = "专案")
+    @ExcelProperty(value = "专案", index = 1)
+    private String project;
+    @ApiModelProperty(value = "build")
+    @ExcelProperty(value = "build", index = 2)
+    private String build;
+    @ApiModelProperty(value = "测试数量")
+    @ExcelProperty(value = "测试数量", index = 3)
+    private String qty;
+    @ApiModelProperty(value = "总时长")
+    @ExcelProperty(value = "总时长", index = 4)
+    private String totalTime;
+    @ApiModelProperty(value = "状态")
+    @ExcelProperty(value = "status", index = 5)
+    private String status;
+    @ApiModelProperty(value = "预计开始时间")
+    @ExcelProperty(value = "预计开始时间", index = 6)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date startTime;
+    @ApiModelProperty(value = "预计结束时间")
+    @ExcelProperty(value = "预计结束时间", index = 7)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date endTime;
+
+
+    @ApiModelProperty(value = "WF_ID")
+    @ExcelProperty(value = "WF_ID", index = 8)
+    private String wfid;
+    @ApiModelProperty(value = "测试项目名称")
+    @ExcelProperty(value = "测试项目名称", index = 9)
+    private String testName;
+    @ApiModelProperty(value = "测试时长")
+    @ExcelProperty(value = "测试时长", index = 10)
+    private Integer testTime;
+    @ApiModelProperty(value = "数量")
+    @ExcelProperty(value = "数量", index = 11)
+    private Integer detailQty;
+    @ApiModelProperty(value = "预计开始时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ExcelProperty(value = "预计开始时间", index = 12)
+    private Date detailStartTime;
+    @ApiModelProperty(value = "预计结束时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ExcelProperty(value = "预计结束时间", index = 13)
+    private Date detailEndTime;
+
+    public TestDemo() {
+    }
+
+    public TestDemo(TestDemo testDemo,TestDemoExtend testDemoExtend) {
+        this.cfgNo = testDemoExtend.getCfgNo();
+        this.project = testDemoExtend.getProject();
+        this.build = testDemoExtend.getBuild();
+        this.qty = testDemoExtend.getQty();
+        this.totalTime = testDemoExtend.getTotalTime();
+        this.status = testDemoExtend.getStatus();
+        this.startTime = testDemoExtend.getStartTime();
+        this.endTime = testDemoExtend.getEndTime();
+
+        this.wfid = testDemo.getWfid();
+        this.testName = testDemo.getTestName();
+        this.testTime = testDemo.getTestTime();
+        this.detailQty = testDemo.getDetailQty();
+        this.detailStartTime = testDemo.getDetailStartTime();
+        this.detailEndTime = testDemo.getDetailEndTime();
+    }
+}
+```
+
+```java
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
+import java.util.Date;
+
+@Data
+public class TestDemoExtend {
+
+    @ApiModelProperty(value = "CFG编号")
+    private String cfgNo;
+    @ApiModelProperty(value = "专案")
+    private String project;
+    @ApiModelProperty(value = "build")
+    private String build;
+    @ApiModelProperty(value = "测试数量")
+    private String qty;
+    @ApiModelProperty(value = "总时长")
+    private String totalTime;
+    @ApiModelProperty(value = "状态")
+    private String status;
+    @ApiModelProperty(value = "预计开始时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date startTime;
+    @ApiModelProperty(value = "预计结束时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date endTime;
+}
+
+```
+
+```java
+@PostMapping("/importExcel2")
+@ApiOperation(value = "测试导入")
+public void importExcel(@RequestParam("file") MultipartFile file){
+
+    List<TestDemo> dataList = new ArrayList<>();
+
+    AnalysisEventListener<TestDemo> analysisEventListener = new AnalysisEventListener<TestDemo>() {
+
+        final TestDemoExtend testDemoOther = new TestDemoExtend();
+
+        @Override
+        public void invoke(TestDemo data, AnalysisContext context) {
+            if(!StringUtils.isEmpty(data.getCfgNo())){
+                BeanUtils.copyProperties(data,testDemoOther);
+                dataList.add(data);
+            }else{
+                TestDemo newData = new TestDemo(data,testDemoOther);
+                dataList.add(newData);
+            }
+
+        }
+
+        @Override
+        public void doAfterAllAnalysed(AnalysisContext analysisContext) {
+
+        }
+    };
+
+    try {
+        EasyExcel.read(file.getInputStream(),TestDemo.class,analysisEventListener)
+            .headRowNumber(2) //指定表头
+            .ignoreEmptyRow(false) //是否忽略空行，感觉不起作用
+            //                    .sheet(1).doRead(); //可指定sheet,指定sheet后用doRead
+            .doReadAll();
+        for (TestDemo testDemo : dataList) {
+            System.out.println(testDemo.toString());
+        }
+
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+```
+
 #### 导出
 
 - 实体
