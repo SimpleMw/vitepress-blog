@@ -11,12 +11,12 @@ export default {
                         collapsed: true,
                         items: [
                             {
-                                text: 'Oracle-触发器',
-                                link: '/guide/java/database/oracle/Oracle-触发器.md'
+                                "text": 'Oracle-触发器',
+                                "link": '/guide/java/database/oracle/Oracle-触发器.md'
                             },
                             {
-                                text: 'Oracle-数据库学习',
-                                link: '/guide/java/database/oracle/Oracle-数据库学习.md'
+                                "text": 'Oracle-数据库学习',
+                                "link": '/guide/java/database/oracle/Oracle-数据库学习.md'
                             },
                         ],
                     },
@@ -25,24 +25,24 @@ export default {
                         collapsed: true,
                         items: [
                             {
-                                text: 'mysql-数据库连接',
-                                link: '/guide/java/database/mysql/mysql-数据库连接.md'
+                                "text": 'mysql-数据库连接',
+                                "link": '/guide/java/database/mysql/mysql-数据库连接.md'
                             },
                             {
-                                text: 'mysql-mysql8配置',
-                                link: '/guide/java/database/mysql/mysql-mysql8配置.md'
+                                "text": 'mysql-mysql8配置',
+                                "link": '/guide/java/database/mysql/mysql-mysql8配置.md'
                             },
                             {
-                                text: 'mysql-mysql索引',
-                                link: '/guide/java/database/mysql/mysql-mysql索引.md'
+                                "text": 'mysql-mysql索引',
+                                "link": '/guide/java/database/mysql/mysql-mysql索引.md'
                             },
                             {
-                                text: 'mysql-mysql小点杂',
-                                link: '/guide/java/database/mysql/mysql-mysql小点杂.md'
+                                "text": 'mysql-mysql小点杂',
+                                "link": '/guide/java/database/mysql/mysql-mysql小点杂.md'
                             },
                             {
-                                text: 'mysql-lock',
-                                link: '/guide/java/database/mysql/mysql-lock.md'
+                                "text": 'mysql-lock',
+                                "link": '/guide/java/database/mysql/mysql-lock.md'
                             },
                         ],
                     },
@@ -59,20 +59,20 @@ export default {
                 collapsed: true,
                 items: [
                     {
-                        text: 'GC垃圾回收思想',
-                        link: '/guide/java/javabasic/GC垃圾回收思想.md'
+                        "text": 'GC垃圾回收思想',
+                        "link": '/guide/java/javabasic/GC垃圾回收思想.md'
                     },
                     {
-                        text: 'Http请求',
-                        link: '/guide/java/javabasic/Http请求.md'
+                        "text": 'Http请求',
+                        "link": '/guide/java/javabasic/Http请求.md'
                     },
                     {
-                        text: 'IO流',
-                        link: '/guide/java/javabasic/IO流.md'
+                        "text": 'IO流',
+                        "link": '/guide/java/javabasic/IO流.md'
                     },
                     {
-                        text: 'JFrame',
-                        link: '/guide/java/javabasic/JFrame.md'
+                        "text": 'JFrame',
+                        "link": '/guide/java/javabasic/JFrame.md'
                     },
                     {
                         "text": "jvm",
@@ -92,7 +92,11 @@ export default {
                     },
                     {
                         "text": "Poi",
-                        "link": "/guide/java/javabasic/Poi.md"
+                        "link": "/guide/java/javabasic/poi.md"
+                    },
+                    {
+                        "text": "Easyexcel",
+                        "link": "/guide/java/javabasic/poi-easyexcel.md"
                     },
                     {
                         "text": "web作用域",
@@ -285,20 +289,20 @@ export default {
                         collapsed: true,
                         items: [
                             {
-                                text: 'Eureka',
-                                link: '/guide/java/SpringCloud/Spring Cloud Netflix/Eureka.md'
+                                "text": 'Eureka',
+                                "link": '/guide/java/SpringCloud/Spring Cloud Netflix/Eureka.md'
                             },
                             {
-                                text: 'Feign',
-                                link: '/guide/java/SpringCloud/Spring Cloud Netflix/Feign.md'
+                                "text": 'Feign',
+                                "link": '/guide/java/SpringCloud/Spring Cloud Netflix/Feign.md'
                             },
                             {
-                                text: 'Hystrix',
-                                link: '/guide/java/SpringCloud/Spring Cloud Netflix/Hystrix.md'
+                                "text": 'Hystrix',
+                                "link": '/guide/java/SpringCloud/Spring Cloud Netflix/Hystrix.md'
                             },
                             {
-                                text: 'Ribbon',
-                                link: '/guide/java/SpringCloud/Spring Cloud Netflix/Ribbon.md'
+                                "text": 'Ribbon',
+                                "link": '/guide/java/SpringCloud/Spring Cloud Netflix/Ribbon.md'
                             },
                         ],
                     },
