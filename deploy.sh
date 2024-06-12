@@ -1,3 +1,4 @@
+//启动 yarn docs:dev
 set -e
 
 yarn docs:build

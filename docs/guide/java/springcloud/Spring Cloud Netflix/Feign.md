@@ -93,3 +93,95 @@ public class DemoService {
 </dependencyManagement>
 ```
 
+生产者方和消费者请求方式的对应关系
+
+- POST请求(openFeign默认的请求方式是json,即默认是@RequestBody)
+
+```java
+@RestController
+@RequestMapping("test")
+public class OpenFeignProviderController {
+    @PostMapping("/demo1")
+    public Demo creatDemo(@RequestBody Demo demo){
+        return Demo;
+    }
+}
+```
+
+```java
+@FeignClient(value = "feign-provider")
+public interface OpenFeignService {
+    @PostMapping("/test/demo1")
+    Demo creatDemo(@RequestBody Demo demo);
+}
+```
+
+- 表单传参
+
+```java
+@RestController
+@RequestMapping("test")
+public class OpenFeignProviderController {
+    @PostMapping("/demo2")
+    public Demo creatDemo(Demo demo){
+        return Demo;
+    }
+}
+```
+
+```java
+@FeignClient(value = "feign-provider")
+public interface OpenFeignService {
+    @PostMapping("/test/demo2")
+    Demo creatDemo(@SpringQueryMap Demo demo);
+}
+```
+
+- url参数
+
+```java
+@RestController
+@RequestMapping("test")
+public class OpenFeignProviderController {
+    @GetMapping("/demo3/{id}")
+    public String demo3(@PathVariable("id")Integer id){
+        return id;
+    }
+}
+```
+
+```java
+@FeignClient(value = "feign-provider")
+public interface OpenFeignService {
+ 	@GetMapping("/test/demo3/{id}")
+    String demo3(@PathVariable("id")Integer id);
+}
+```
+
+- 其它方式
+
+```java
+@RestController
+@RequestMapping("test")
+public class OpenFeignProviderController {
+	@PostMapping("/demo4")
+    public String demo4(String id,String name){
+        return id+name;
+    }
+}
+```
+
+```java
+@FeignClient(value = "feign-provider")
+public interface OpenFeignService {
+    /**
+     * 必须要@RequestParam注解标注，且value属性必须填上参数名
+     * 方法参数名可以任意，但是@RequestParam注解中的value属性必须和provider中的参数名相同
+     */
+    @PostMapping("/test/demo4")
+    String test(@RequestParam("id") String arg1,@RequestParam("name") String arg2);
+}
+```
+
+
+

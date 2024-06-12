@@ -109,6 +109,27 @@ WHERE
 SELECT LEFT(SUBSTRING('QWER',help_topic_id+1),1) AS num FROM mysql.help_topic WHERE help_topic_id < LENGTH('QWER');
 ```
 
+#### 关联非存在表
+
+```sql
+select a.*,b.* from
+(
+	select '张三' as name
+union
+	select '李四' as name
+union
+	select '王麻子' as name
+) a
+left join (
+	select '2024-06-11' as `date`
+union
+	select '2024-06-12' as `date`
+union
+	select '2024-06-13' as `date`
+) b on 1 = 1
+where 1=1
+```
+
 
 
 #### 常用语法

@@ -366,6 +366,10 @@ export default {
                         text: 'Promethus',
                         link: '/guide/java/other/promethus.md'
                     },
+                    {
+                        text: 'docker',
+                        link: '/guide/java/other/docker.md'
+                    },
                 ]
             }
         ],
