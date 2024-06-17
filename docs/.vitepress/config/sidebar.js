@@ -384,6 +384,34 @@ export default {
                     },
                 ]
             }
-        ]
+        ],
+        '/guide/microcontroller': [
+            {
+                text: 'ESP8266',
+                collapsed: false,
+                items: [
+                    {
+                        "text": "esp8266",
+                        "link": "/guide/microcontroller/esp8266/esp8266.md"
+                    },
+                    {
+                        "text": 'esp8266-blinker',
+                        "link": "/guide/microcontroller/esp8266/esp8266-blinker.md"
+                    },
+                ]
+            },
+            {
+                text: 'STM32',
+                collapsed: false,
+                items: [
+                ]
+            },
+            {
+                text: 'ESP32',
+                collapsed: false,
+                items: [
+                ]
+            }
+        ],
     }
 };

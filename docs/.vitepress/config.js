@@ -28,6 +28,13 @@ export default {
               { text: 'JAVA', link: '/guide/java/' },
               { text: 'PYTHON', link: '/guide/python/' },
             ]
+          },
+          {
+            // Title for the section.
+            text: '嵌入式',
+            items: [
+              { text: '单片机', link: '/guide/microcontroller/' },
+            ]
           }
         ]
       },
